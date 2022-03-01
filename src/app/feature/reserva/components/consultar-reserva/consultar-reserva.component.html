@@ -1,0 +1,72 @@
+<br>
+<h1>Consultar Reserva</h1>
+<form [formGroup]="consultaForm" (ngSubmit)="consultar()">
+    <div class="row justify-content-center">
+        <div class="col-sm-8">
+            <div class="row justify-content-center">
+                <div class="col-sm-11">
+                    <label>Id reserva:</label>
+                    <input validar type="text" id="id" name="id" placeholder="Id reserva" class="form-control" formControlName="id">
+                </div>
+            </div>
+            <br>
+            <div class="row justify-content-end">
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-success" id="botonConsultar" [disabled]="!consultaForm.valid">Consultar reserva</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<br>
+<div class="row justify-content-center">
+    <div class="col-sm-7">
+        <div *ngIf="tablaVisible" class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr class="bg-primary">
+                        <th>Id reserva</th>
+                        <th>Identificaci&oacute;n cliente</th>
+                        <th>Nombre cliente</th>
+                        <th>Tipo Vehiculo</th>
+                        <th>Fecha inicio</th>
+                        <th>Fecha fin</th>
+                        <th>Numero d&iacute;as</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of listaReservas" class="table-light">
+                        <td nowrap>{{item.id}}</td>
+                        <td nowrap>{{item.idCliente}}</td>
+                        <td nowrap>{{item.nombreCliente}}</td>
+                        <td *ngIf="item.tipoVehiculo == 1" nowrap>Automovil</td>
+                        <td *ngIf="item.tipoVehiculo == 2" nowrap>Camioneta</td>
+                        <td *ngIf="item.tipoVehiculo == 3" nowrap>Van</td>
+                        <td nowrap>{{item.fechaInicio}}</td>
+                        <td nowrap>{{item.fechaFin}}</td>
+                        <td nowrap>{{item.numeroDias}}</td>
+                        <td nowrap>{{item.valor}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Button trigger modal -->
+<button type="button" class="alerta-consultar btn btn-primary" data-bs-toggle="modal" data-bs-target="#alertaConsultarModal" hidden>
+    Alert Modal
+  </button>
+<!-- Modal -->
+<div class="modal fade" id="alertaConsultarModal" tabindex="-1" aria-labelledby="alertaConsultarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h6>{{mensaje}}</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

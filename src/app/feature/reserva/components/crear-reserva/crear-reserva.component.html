@@ -1,0 +1,62 @@
+<br>
+<form [formGroup]="reservaForm" (ngSubmit)="crear()">
+    <div class="row justify-content-center">
+        <div class="card col-sm-8">
+            <h1>Crear Reserva</h1>
+            <div class="row justify-content-center">
+                <div class="col-sm-6">
+                    <label>Numero Identificacion:</label>
+                    <input validar type="text" id="idCliente" name="idCliente" placeholder="Numero identificación" class="form-control" formControlName="idCliente">
+                </div>
+                <div class="col-sm-6">
+                    <label>Nombre Cliente:</label>
+                    <input validar type="text" id="nombreCliente" name="nombreCliente" placeholder="Nombre Cliente" class="form-control" formControlName="nombreCliente">
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-sm-6">
+                    <label>Tipo Vehiculo:</label>
+                    <select validar name="tipoVehiculo" id="tipoVehiculo" formControlName="tipoVehiculo" class="form-select">
+                        <option value="1">Automovil</option>
+                        <option value="2">Camioneta</option>
+                        <option value="3">Van</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label>Fecha Inicio: </label>
+                    <input validar type="date" id="fechaInicio" name="fechaInicio" placeholder="Fecha Inicio" class="form-control" formControlName="fechaInicio" min="{{fechaPermitida}}">
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-sm-6">
+                    <label>Numero D&iacute;as:</label>
+                    <input validar type="text" id="numeroDias" name="numeroDias" placeholder="Numero D&iacute;as" class="form-control" formControlName="numeroDias">
+                </div>
+                <div class="col-sm-6"></div>
+            </div>
+            <div class="row justify-content-end">
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-success" id="botonCrear" [disabled]="!reservaForm.valid">Crear Reserva</button>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</form>
+<!-- Button trigger modal -->
+<button type="button" class="alerta-crear btn btn-primary" data-bs-toggle="modal" data-bs-target="#alertaCrearModal" hidden>
+    Alert Modal
+  </button>
+<!-- Modal -->
+<div class="modal" id="alertaCrearModal" tabindex="-1" aria-labelledby="alertaCrearModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h6>{{mensaje}}</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

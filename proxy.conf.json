@@ -1,0 +1,7 @@
+{
+  "/reservacion": {
+    "target": "http://localhost:9091",
+    "logLevel": "debug"
+  }
+
+}
