@@ -34,7 +34,7 @@ pipeline {
 		checkout scm
       }
     }
-    
+
     stage('NPM Install') {
       steps {
         echo "------------>Installing<------------"
@@ -55,23 +55,20 @@ pipeline {
       }
     }
 
-
     stage('Static Code Analysis') {
         steps{
-            sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:alquiler.vehiculos-juan.ochoa',
-            sonarName:'''"CeibaADN-AlquilerVehiculos(juan.ochoa)"''',
+            sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:alquiler.vehiculos.front-juan.ochoa',
+            sonarName:'''"CeibaADN-AlquilerVehiculos-Front(juan.ochoa)"''',
             sonarPathProperties:'./sonar-project.properties')
         }
     }
 
     stage('Build') {
-      steps {
+     steps {
         echo "------------>Building<------------"
         sh 'npm run build'
       }
     }
-  }
-  
   }
 
   post {
@@ -80,7 +77,7 @@ pipeline {
     }
     success {
       echo 'This will run only if successful'
-      junit '**/test-results/test/*.xml'
+      junit '*/test-results/test/.xml'
     }
     failure {
       echo 'This will run only if failed'
