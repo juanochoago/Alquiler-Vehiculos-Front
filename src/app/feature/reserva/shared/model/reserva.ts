@@ -6,7 +6,7 @@ export class Reserva {
     fechaInicio: string;
     fechaFin: string;
     numeroDias: number;
-    valor: number
+    valor: number;
 
     constructor(id: number, idCliente: number, nombreCliente: string, tipoVehiculo: number, fechaInicio: string, fechaFin: string, numeroDias: number, valor: number) {
         this.id = id;

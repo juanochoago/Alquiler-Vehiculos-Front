@@ -23,6 +23,7 @@
     <div class="col-sm-7">
         <div *ngIf="tablaVisible" class="table-responsive">
             <table class="table">
+                <caption>Reserva</caption>
                 <thead>
                     <tr class="bg-primary">
                         <th>Id reserva</th>
@@ -37,16 +38,16 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of listaReservas" class="table-light">
-                        <td nowrap>{{item.id}}</td>
-                        <td nowrap>{{item.idCliente}}</td>
-                        <td nowrap>{{item.nombreCliente}}</td>
-                        <td *ngIf="item.tipoVehiculo == 1" nowrap>Automovil</td>
-                        <td *ngIf="item.tipoVehiculo == 2" nowrap>Camioneta</td>
-                        <td *ngIf="item.tipoVehiculo == 3" nowrap>Van</td>
-                        <td nowrap>{{item.fechaInicio}}</td>
-                        <td nowrap>{{item.fechaFin}}</td>
-                        <td nowrap>{{item.numeroDias}}</td>
-                        <td nowrap>{{item.valor}}</td>
+                        <td>{{item.id}}</td>
+                        <td>{{item.idCliente}}</td>
+                        <td>{{item.nombreCliente}}</td>
+                        <td *ngIf="item.tipoVehiculo == 1">Automovil</td>
+                        <td *ngIf="item.tipoVehiculo == 2">Camioneta</td>
+                        <td *ngIf="item.tipoVehiculo == 3">Van</td>
+                        <td>{{item.fechaInicio}}</td>
+                        <td>{{item.fechaFin}}</td>
+                        <td>{{item.numeroDias}}</td>
+                        <td>{{item.valor}}</td>
                     </tr>
                 </tbody>
             </table>

@@ -14,8 +14,8 @@ const LONGITUD_MAXIMA_PERMITIDA_ID = 10;
 export class ConsultarReservaComponent implements OnInit {
   reserva: Reserva;
   listaReservas: Reserva[] = [];
-  tablaVisible: boolean = false;
-  mensaje: String;
+  tablaVisible = false;
+  mensaje: string;
   consultaForm: FormGroup;
 
 

@@ -5,7 +5,7 @@ import { ReservaService } from '@reserva/shared/service/reserva.service';
 
 const LONGITUD_MINIMA_PERMITIDA_ID = 1;
 const LONGITUD_MAXIMA_PERMITIDA_ID = 10;
-const MENSAJE_RESERVA_ACTUALIZADA = "Reserva actualizada correctamente, Puede verificarla en el area de consultas";
+const MENSAJE_RESERVA_ACTUALIZADA = 'Reserva actualizada correctamente, Puede verificarla en el area de consultas';
 
 @Component({
   selector: 'app-actualizar-reserva',
@@ -17,7 +17,7 @@ export class ActualizarReservaComponent implements OnInit {
   reservaForm: FormGroup;
   fechaPermitida: string;
   reserva: Reserva;
-  mensaje: String;
+  mensaje: string;
 
   constructor(protected reservaService: ReservaService) { }
 

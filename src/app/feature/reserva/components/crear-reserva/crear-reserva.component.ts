@@ -8,7 +8,7 @@ const LONGITUD_MINIMA_PERMITIDA_NOMBRE = 3;
 const LONGITUD_MAXIMA_PERMITIDA_NOMBRE = 40;
 const LONGITUD_MINIMA_PERMITIDA_DIAS = 1;
 const LONGITUD_MAXIMA_PERMITIDA_DIAS = 2;
-const MENSAJE_RESERVA_CREADA = "Reserva creada correctamente, Numero de reserva =";
+const MENSAJE_RESERVA_CREADA = 'Reserva creada correctamente, Numero de reserva =';
 
 @Component({
   selector: 'app-crear-reserva',
@@ -18,8 +18,8 @@ const MENSAJE_RESERVA_CREADA = "Reserva creada correctamente, Numero de reserva 
 export class CrearReservaComponent implements OnInit {
 
   reservaForm: FormGroup;
-  fechaPermitida: String;
-  mensaje: String;
+  fechaPermitida: string;
+  mensaje: string;
 
   constructor(protected reservaService: ReservaService) { }
 
