@@ -30,7 +30,6 @@ export class CrearReservaComponent implements OnInit {
 
   crear() {
     this.reservaService.guardar(this.reservaForm.value).subscribe((result) => {
-      console.log(JSON.stringify(result));
       this.mensaje = MENSAJE_RESERVA_CREADA + result['valor'];
       let element: HTMLElement = document.getElementsByClassName('alerta-crear')[0] as HTMLElement;
       element.click();

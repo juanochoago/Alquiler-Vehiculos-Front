@@ -2,8 +2,8 @@ import { NavbarPage } from '../page/navbar/navbar.po';
 import { AppPage } from '../app.po';
 import { ReservaPage } from '../page/reserva/reserva.po';
 
-const MENSAJE_RESERVA_CREADA = "Reserva creada correctamente, Numero de reserva =";
-const MENSAJE_RESERVA_ACTUALIZADA = "Reserva actualizada correctamente, Puede verificarla en el area de consultas";
+const MENSAJE_RESERVA_CREADA = 'Reserva creada correctamente, Numero de reserva =';
+const MENSAJE_RESERVA_ACTUALIZADA = 'Reserva actualizada correctamente, Puede verificarla en el area de consultas';
 
 describe('workspace-project Producto', () => {
     let page: AppPage;
@@ -19,7 +19,7 @@ describe('workspace-project Producto', () => {
     it('Deberia crear reserva', () => {
         const ID_CLIENTE = '1026295581';
         const NOMBRE_CLIENTE = 'Juan';
-        const TIPO_VEHICULO = "Automovil";
+        const TIPO_VEHICULO = 'Automovil';
         const FECHA_INICIO = '01-03-2022';
         const NUMERO_DIAS = '2';
 

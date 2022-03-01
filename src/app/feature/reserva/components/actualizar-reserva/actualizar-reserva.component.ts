@@ -29,9 +29,7 @@ export class ActualizarReservaComponent implements OnInit {
   actualizar(reserva: Reserva) {
     this.reserva.id = reserva.id;
     this.reserva.fechaInicio = reserva.fechaInicio;
-    console.log(this.reserva);
-    this.reservaService.actualizar(this.reserva).subscribe((result) => {
-      console.log(JSON.stringify(result));
+    this.reservaService.actualizar(this.reserva).subscribe((): void => {
       this.mensaje = MENSAJE_RESERVA_ACTUALIZADA;
       let element: HTMLElement = document.getElementsByClassName('alerta-actualizar')[0] as HTMLElement;
       element.click();
@@ -50,7 +48,7 @@ export class ActualizarReservaComponent implements OnInit {
       this.actualizar(reserva);
     },
       error => {
-        console.log(error);
+        window.console.error(error);
         this.reserva = new Reserva(0, 0, '', 0, this.fechaPermitida, this.fechaPermitida, 0, 0);
       });
   }
