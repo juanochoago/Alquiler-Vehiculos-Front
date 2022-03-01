@@ -35,14 +35,26 @@ pipeline {
       }
     }
     
-    stage('Compile & Unit Tests') {
-      steps{
-        echo "------------>Compile & Unit Tests<------------"
-		sh 'chmod +x microservicio/gradlew'
-		sh './microservicio/gradlew --b ./microservicio/build.gradle clean'
-		sh './microservicio/gradlew --b microservicio/build.gradle test'
+    stage('NPM Install') {
+      steps {
+        echo "------------>Installing<------------"
+        sh 'npm install'
       }
     }
+
+    stage('Unit Test') {
+      steps {
+        echo "------------>Testing<------------"
+        sh 'npm run test'
+      }
+    }
+    stage('Test end-to-end') {
+      steps{
+        echo "------------>Testing Protractor<------------"
+        sh 'npm run e2e'
+      }
+    }
+
 
     stage('Static Code Analysis') {
         steps{
@@ -54,10 +66,12 @@ pipeline {
 
     stage('Build') {
       steps {
-        echo "------------>Build<------------"
-        sh './microservicio/gradlew --b ./microservicio/build.gradle build -x test'
+        echo "------------>Building<------------"
+        sh 'npm run build'
       }
-    }  
+    }
+  }
+  
   }
 
   post {
