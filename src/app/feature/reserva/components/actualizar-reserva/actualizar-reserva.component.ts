@@ -15,9 +15,9 @@ const MENSAJE_RESERVA_ACTUALIZADA = 'Reserva actualizada correctamente, Puede ve
 export class ActualizarReservaComponent implements OnInit {
 
   reservaForm: FormGroup;
-  fechaPermitida: string;
+  fecha: string;
   reserva: Reserva;
-  mensaje: string;
+  mensajeActualizar: string;
 
   constructor(protected reservaService: ReservaService) { }
 
@@ -30,13 +30,13 @@ export class ActualizarReservaComponent implements OnInit {
     this.reserva.id = reserva.id;
     this.reserva.fechaInicio = reserva.fechaInicio;
     this.reservaService.actualizar(this.reserva).subscribe((): void => {
-      this.mensaje = MENSAJE_RESERVA_ACTUALIZADA;
+      this.mensajeActualizar = MENSAJE_RESERVA_ACTUALIZADA;
       let element: HTMLElement = document.getElementsByClassName('alerta-actualizar')[0] as HTMLElement;
       element.click();
       this.reservaForm.reset();
     },
       error => {
-        this.mensaje = error['error']['mensaje'];
+        this.mensajeActualizar = error['error']['mensaje'];
         let element: HTMLElement = document.getElementsByClassName('alerta-actualizar')[0] as HTMLElement;
         element.click();
       });
@@ -49,7 +49,7 @@ export class ActualizarReservaComponent implements OnInit {
     },
       error => {
         window.console.error(error);
-        this.reserva = new Reserva(0, 0, '', 0, this.fechaPermitida, this.fechaPermitida, 0, 0);
+        this.reserva = new Reserva(0, 0, '', 0, this.fecha, this.fecha, 0, 0);
       });
   }
 
@@ -62,13 +62,13 @@ export class ActualizarReservaComponent implements OnInit {
   }
 
   public calcularFechaPermitida() {
-    let menosDos = -2;
+    let dos = -2;
     let date = new Date();
     date = this.sumarDias(date, 1);
-    let day = `0${date.getDate()}`.slice(menosDos);
-    let month = `0${date.getMonth() + 1}`.slice(menosDos);
-    let year = date.getFullYear();
-    this.fechaPermitida = `${year}-${month}-${day}`;
+    let d = `0${date.getDate()}`.slice(dos);
+    let m = `0${date.getMonth() + 1}`.slice(dos);
+    let y = date.getFullYear();
+    this.fecha = `${y}-${m}-${d}`;
   }
 
   private sumarDias(fecha, dias) {
