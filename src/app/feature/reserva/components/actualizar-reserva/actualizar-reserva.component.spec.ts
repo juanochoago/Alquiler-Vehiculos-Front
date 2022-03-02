@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 //import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
+import { Reserva } from '@reserva/shared/model/reserva';
 import { ReservaService } from '@reserva/shared/service/reserva.service';
 import { of, throwError } from 'rxjs';
 
@@ -13,7 +14,7 @@ describe('ActualizarReservaComponent', () => {
   let component: ActualizarReservaComponent;
   let fixture: ComponentFixture<ActualizarReservaComponent>;
   let reservaService: ReservaService;
-  //const formBuilder: FormBuilder = new FormBuilder();
+  const reserva: Reserva = new Reserva(1, 1026295589, 'Juan Angel', 1, '2022-02-28', '2022-03-2', 3, 300000);
   const MENSAJE_RESERVA_ACTUALIZADA = "Reserva actualizada correctamente, Puede verificarla en el area de consultas";
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -22,7 +23,7 @@ describe('ActualizarReservaComponent', () => {
         CommonModule,
         HttpClientModule,
         RouterTestingModule,
-      //  ReactiveFormsModule,
+        //  ReactiveFormsModule,
         //FormsModule
       ],
       providers: [ReservaService, HttpService],
@@ -58,7 +59,11 @@ describe('ActualizarReservaComponent', () => {
     component.actualizaForm.controls.id.setValue(1);
     component.actualizaForm.controls.fechaInicio.setValue('25-03-2022');
     expect(component.actualizaForm.valid).toBeTruthy();
+    spyOn(reservaService, 'consultar').and.callFake(() => {
+      return of(reserva)
+    });
     component.consultar();
+    expect(reservaService.consultar).toHaveBeenCalled();
     component.actualizar();
     expect(component.mensajeActualizar).toContain(MENSAJE_RESERVA_ACTUALIZADA);
   });
@@ -67,7 +72,7 @@ describe('ActualizarReservaComponent', () => {
     reservaService.actualizar = jasmine.createSpy().and.returnValue(throwError({
       "nombreExcepcion": "ExcepcionDuplicidad",
       "mensaje": "La reserva no existe en el sistema"
-  }));
+    }));
     component.actualizar();
     expect(reservaService.actualizar).toHaveBeenCalled();
   });
