@@ -42,14 +42,7 @@ export class ActualizarReservaComponent implements OnInit {
 
   consultar() {
     this.reservaService.consultar(this.actualizaForm.value).subscribe(result => {
-      this.reserva.id = this.actualizaForm.get('id')?.value;
-      this.reserva.idCliente = result['idCliente'];
-      this.reserva.nombreCliente = result['nombreCliente'];
-      this.reserva.tipoVehiculo = result['tipoVehiculo'];
-      this.reserva.fechaInicio = this.actualizaForm.get('fechaInicio')?.value
-      this.reserva.fechaFin = result['fechaFin'];
-      this.reserva.numeroDias = result['numeroDias'];
-      this.reserva.valor = result['valor'];
+      this.reserva = new Reserva(this.actualizaForm.get('id')?.value, result['idCliente'], result['nombreCliente'], result['tipoVehiculo'], this.actualizaForm.get('fechaInicio')?.value, result['fechaFin'], result['numeroDias'], result['valor']);
       this.actualizar();
     },
       error => {
