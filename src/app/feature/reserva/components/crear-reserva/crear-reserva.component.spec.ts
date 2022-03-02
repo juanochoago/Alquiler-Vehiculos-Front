@@ -9,7 +9,7 @@ import { CrearReservaComponent } from './crear-reserva.component';
 import { HttpService } from '@core/services/http.service';
 import { of } from 'rxjs';
 
-const MENSAJE_RESERVA_CREADA = "Reserva creada correctamente, Numero de reserva =";
+const MENSAJE_RESERVA_CREADA = 'Reserva creada correctamente, Numero de reserva =';
 
 describe('CrearReservaComponent', () => {
   let component: CrearReservaComponent;
@@ -51,10 +51,10 @@ describe('CrearReservaComponent', () => {
 
   it('Crear fecha permitida', () => {
     component.calcularFechaPermitida();
-    expect(component.fechaPermitida).toBe('2022-03-02');
+    expect(component.fechaPermitida).toBe('2022-03-03');
   });
   
-  it('Registrando producto', () => {
+  it('Crear Reserva', () => {
     expect(component.reservaForm.valid).toBeFalsy();
     component.reservaForm.controls.idCliente.setValue(1026295589);
     component.reservaForm.controls.nombreCliente.setValue('Juan');
@@ -66,7 +66,7 @@ describe('CrearReservaComponent', () => {
 
     component.crear();
     expect(component.mensaje).toContain(MENSAJE_RESERVA_CREADA);
-    // Aca validamos el resultado esperado al enviar la petición
-    // TODO adicionar expect
+
   });
+
 });
