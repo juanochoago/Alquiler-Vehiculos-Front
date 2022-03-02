@@ -29,7 +29,9 @@ export class ConsultarReservaComponent implements OnInit {
     this.reservaServices.consultar(this.consultaForm.value).subscribe(result => {
       this.tablaVisible = false;
       this.listaReservas = [];
-      this.reserva = new Reserva(result['id'], result['idCliente'], result['nombreCliente'], result['tipoVehiculo'], result['fechaInicio'], result['fechaFin'], result['numeroDias'], result['valor']);
+      this.reserva = new Reserva(result['id'], result['idCliente'], result['nombreCliente'],
+       result['tipoVehiculo'], result['fechaInicio'], result['fechaFin'], result['numeroDias'],
+        result['valor']);
       this.listaReservas.push(this.reserva);
       this.tablaVisible = true;
     },
