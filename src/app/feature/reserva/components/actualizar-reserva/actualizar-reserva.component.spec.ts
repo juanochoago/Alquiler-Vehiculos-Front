@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+//import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
 import { ReservaService } from '@reserva/shared/service/reserva.service';
@@ -13,7 +13,8 @@ describe('ActualizarReservaComponent', () => {
   let component: ActualizarReservaComponent;
   let fixture: ComponentFixture<ActualizarReservaComponent>;
   let reservaService: ReservaService;
-  //const MENSAJE_RESERVA_ACTUALIZADA = "Reserva actualizada correctamente, Puede verificarla en el area de consultas";
+  //const formBuilder: FormBuilder = new FormBuilder();
+  const MENSAJE_RESERVA_ACTUALIZADA = "Reserva actualizada correctamente, Puede verificarla en el area de consultas";
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ActualizarReservaComponent],
@@ -21,8 +22,8 @@ describe('ActualizarReservaComponent', () => {
         CommonModule,
         HttpClientModule,
         RouterTestingModule,
-        ReactiveFormsModule,
-        FormsModule
+      //  ReactiveFormsModule,
+        //FormsModule
       ],
       providers: [ReservaService, HttpService],
     })
@@ -44,21 +45,22 @@ describe('ActualizarReservaComponent', () => {
   });
 
   it('Formulario invalido cuando es vacio', () => {
-    expect(component.reservaForm.valid).toBeFalsy();
+    expect(component.actualizaForm.valid).toBeFalsy();
   });
 
   it('Crear fecha permitida', () => {
     component.calcularFechaPermitida();
     expect(component.fecha).toBe('2022-03-02');
   });
-  /*it('Actualizando reserva', () => {
-    expect(component.reservaForm.valid).toBeFalsy();
-    component.reservaForm.controls.id.setValue(1);
-    component.reservaForm.controls.fechaInicio.setValue('2022-03-25');
-    expect(component.reservaForm.valid).toBeTruthy();
+
+  it('Actualizando reserva', () => {
+    expect(component.actualizaForm.valid).toBeFalsy();
+    component.actualizaForm.controls.id.setValue(1);
+    component.actualizaForm.controls.fechaInicio.setValue('25-03-2022');
+    expect(component.actualizaForm.valid).toBeTruthy();
     component.consultar();
-    component.actualizar(component.reservaForm.value);
-    expect(component.mensaje).toContain(MENSAJE_RESERVA_ACTUALIZADA);
-  });*/
+    component.actualizar();
+    expect(component.mensajeActualizar).toContain(MENSAJE_RESERVA_ACTUALIZADA);
+  });
 
 });

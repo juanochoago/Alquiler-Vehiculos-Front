@@ -14,7 +14,7 @@ const MENSAJE_RESERVA_ACTUALIZADA = 'Reserva actualizada correctamente, Puede ve
 })
 export class ActualizarReservaComponent implements OnInit {
 
-  reservaForm: FormGroup;
+  actualizaForm: FormGroup;
   fecha: string;
   reserva: Reserva;
   mensajeActualizar: string;
@@ -26,14 +26,12 @@ export class ActualizarReservaComponent implements OnInit {
     this.calcularFechaPermitida();
   }
 
-  actualizar(reserva: Reserva) {
-    this.reserva.id = reserva.id;
-    this.reserva.fechaInicio = reserva.fechaInicio;
+  actualizar() {
     this.reservaService.actualizar(this.reserva).subscribe((): void => {
       this.mensajeActualizar = MENSAJE_RESERVA_ACTUALIZADA;
       let element: HTMLElement = document.getElementsByClassName('alerta-actualizar')[0] as HTMLElement;
       element.click();
-      this.reservaForm.reset();
+      this.actualizaForm.reset();
     },
       error => {
         this.mensajeActualizar = error['error']['mensaje'];
@@ -42,10 +40,10 @@ export class ActualizarReservaComponent implements OnInit {
       });
   }
 
-  consultar(reserva: Reserva) {
-    this.reservaService.consultar(this.reservaForm.value).subscribe(result => {
-      this.reserva = new Reserva(result['id'], result['idCliente'], result['nombreCliente'], result['tipoVehiculo'], result['fechaInicio'], result['fechaFin'], result['numeroDias'], result['valor']);
-      this.actualizar(reserva);
+  consultar() {
+    this.reservaService.consultar(this.actualizaForm.value).subscribe(result => {
+      this.reserva = new Reserva(this.actualizaForm.get('id')?.value, result['idCliente'], result['nombreCliente'], result['tipoVehiculo'], this.actualizaForm.get('fechaInicio')?.value, result['fechaFin'], result['numeroDias'], result['valor']);
+      this.actualizar();
     },
       error => {
         window.console.error(error);
@@ -54,7 +52,7 @@ export class ActualizarReservaComponent implements OnInit {
   }
 
   private construirFormularioReserva() {
-    this.reservaForm = new FormGroup({
+    this.actualizaForm = new FormGroup({
       id: new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_ID),
       Validators.maxLength(LONGITUD_MAXIMA_PERMITIDA_ID), Validators.pattern(/^[0-9]\d*$/)]),
       fechaInicio: new FormControl('', [Validators.required]),
