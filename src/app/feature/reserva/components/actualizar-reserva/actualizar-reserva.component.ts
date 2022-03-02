@@ -32,14 +32,23 @@ export class ActualizarReservaComponent implements OnInit {
       let element: HTMLElement = document.getElementsByClassName('alerta-actualizar')[0] as HTMLElement;
       element.click();
       this.actualizaForm.reset();
-    });
+    },
+      error => {
+        this.mensajeActualizar = error['error']['mensaje'];
+        let element: HTMLElement = document.getElementsByClassName('alerta-actualizar')[0] as HTMLElement;
+        element.click();
+      });
   }
 
   consultar() {
     this.reservaService.consultar(this.actualizaForm.value).subscribe(result => {
       this.reserva = new Reserva(this.actualizaForm.get('id')?.value, result['idCliente'], result['nombreCliente'], result['tipoVehiculo'], this.actualizaForm.get('fechaInicio')?.value, result['fechaFin'], result['numeroDias'], result['valor']);
       this.actualizar();
-    });
+    },
+      error => {
+        window.console.error(error);
+        this.reserva = new Reserva(0, 0, '', 0, this.fecha, this.fecha, 0, 0);
+      });
   }
 
   private construirFormularioReserva() {

@@ -7,7 +7,7 @@ import { ReservaService } from '@reserva/shared/service/reserva.service';
 
 import { CrearReservaComponent } from './crear-reserva.component';
 import { HttpService } from '@core/services/http.service';
-import { of, } from 'rxjs';
+import { of, throwError, } from 'rxjs';
 
 const MENSAJE_RESERVA_CREADA = 'Reserva creada correctamente, Numero de reserva =';
 
@@ -67,5 +67,14 @@ describe('CrearReservaComponent', () => {
     component.crear();
     expect(component.mensaje).toContain(MENSAJE_RESERVA_CREADA);
 
+  });
+
+  it('Falla Crear Reserva', () => {
+    reservaService.guardar = jasmine.createSpy().and.returnValue(throwError({
+      "nombreExcepcion": "ExcepcionDuplicidad",
+      "mensaje": "El cliente tiene una reserva activa actualmente"
+    }));
+    component.crear();
+    expect(reservaService.guardar).toHaveBeenCalled();
   });
 });

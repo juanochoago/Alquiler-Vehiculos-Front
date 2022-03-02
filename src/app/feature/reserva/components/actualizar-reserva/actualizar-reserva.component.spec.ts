@@ -5,7 +5,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
 import { ReservaService } from '@reserva/shared/service/reserva.service';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 import { ActualizarReservaComponent } from './actualizar-reserva.component';
 
@@ -61,6 +61,15 @@ describe('ActualizarReservaComponent', () => {
     component.consultar();
     component.actualizar();
     expect(component.mensajeActualizar).toContain(MENSAJE_RESERVA_ACTUALIZADA);
+  });
+
+  it('Falla Actualizar Reserva', () => {
+    reservaService.actualizar = jasmine.createSpy().and.returnValue(throwError({
+      "nombreExcepcion": "ExcepcionDuplicidad",
+      "mensaje": "La reserva no existe en el sistema"
+  }));
+    component.actualizar();
+    expect(reservaService.actualizar).toHaveBeenCalled();
   });
 
 });
