@@ -32,13 +32,7 @@ export class ConsultarReservaComponent implements OnInit {
       this.reserva = new Reserva(result['id'], result['idCliente'], result['nombreCliente'], result['tipoVehiculo'], result['fechaInicio'], result['fechaFin'], result['numeroDias'], result['valor']);
       this.listaReservas.push(this.reserva);
       this.tablaVisible = true;
-    },
-      error => {
-        this.mensaje = error['error']['mensaje'];
-        let element: HTMLElement = document.getElementsByClassName('alerta-consultar')[0] as HTMLElement;
-        element.click();
-        this.tablaVisible = false;
-      });
+    });
   }
 
   private construirFormularioConsulta() {

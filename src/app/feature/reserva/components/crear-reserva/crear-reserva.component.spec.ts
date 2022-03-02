@@ -7,7 +7,7 @@ import { ReservaService } from '@reserva/shared/service/reserva.service';
 
 import { CrearReservaComponent } from './crear-reserva.component';
 import { HttpService } from '@core/services/http.service';
-import { of } from 'rxjs';
+import { of, } from 'rxjs';
 
 const MENSAJE_RESERVA_CREADA = 'Reserva creada correctamente, Numero de reserva =';
 
@@ -53,7 +53,7 @@ describe('CrearReservaComponent', () => {
     component.calcularFechaPermitida();
     expect(component.fechaPermitida).toBe('2022-03-03');
   });
-  
+
   it('Crear Reserva', () => {
     expect(component.reservaForm.valid).toBeFalsy();
     component.reservaForm.controls.idCliente.setValue(1026295589);
@@ -68,5 +68,4 @@ describe('CrearReservaComponent', () => {
     expect(component.mensaje).toContain(MENSAJE_RESERVA_CREADA);
 
   });
-
 });

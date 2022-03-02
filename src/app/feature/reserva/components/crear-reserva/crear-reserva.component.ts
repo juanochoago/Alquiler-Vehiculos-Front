@@ -34,12 +34,7 @@ export class CrearReservaComponent implements OnInit {
       let element: HTMLElement = document.getElementsByClassName('alerta-crear')[0] as HTMLElement;
       element.click();
       this.reservaForm.reset();
-    },
-      error => {
-        this.mensaje = error['error']['mensaje'];
-        let element: HTMLElement = document.getElementsByClassName('alerta-crear')[0] as HTMLElement;
-        element.click();
-      });
+    });
   }
 
   private construirFormularioReserva() {
