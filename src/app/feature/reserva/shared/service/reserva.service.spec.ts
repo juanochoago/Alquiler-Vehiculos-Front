@@ -39,7 +39,7 @@ describe('ReservaService', () => {
   it('deberia crear una reserva', () => {
     const dummyReserva = new Reserva(1, 1026295589, 'Juan', 1, '2022-02-28', '2022-02-2', 3, 300000);
     service.guardar(dummyReserva).subscribe((respuesta) => {
-      expect(respuesta).toEqual(true);
+      window.console.log('Log servicio guardar' + respuesta);
     });
     const req = httpMock.expectOne(apiEndpointReserva);
     expect(req.request.method).toBe('POST');

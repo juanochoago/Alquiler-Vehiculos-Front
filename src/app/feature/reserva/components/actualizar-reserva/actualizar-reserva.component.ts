@@ -29,27 +29,26 @@ export class ActualizarReservaComponent implements OnInit {
   actualizar() {
     this.reservaService.actualizar(this.reserva).subscribe((): void => {
       this.mensajeActualizar = MENSAJE_RESERVA_ACTUALIZADA;
-      let element: HTMLElement = document.getElementsByClassName('alerta-actualizar')[0] as HTMLElement;
+      const element: HTMLElement = document.getElementsByClassName('alerta-actualizar')[0] as HTMLElement;
       element.click();
       this.actualizaForm.reset();
     },
       error => {
-        this.mensajeActualizar = error['error']['mensaje'];
-        let element: HTMLElement = document.getElementsByClassName('alerta-actualizar')[0] as HTMLElement;
+        this.mensajeActualizar = error.error.mensaje;
+        const element: HTMLElement = document.getElementsByClassName('alerta-actualizar')[0] as HTMLElement;
         element.click();
       });
   }
 
   consultar() {
     this.reservaService.consultar(this.actualizaForm.value).subscribe(result => {
-      this.reserva = new Reserva(this.actualizaForm.get('id')?.value, result['idCliente'], result['nombreCliente'],
-       result['tipoVehiculo'], this.actualizaForm.get('fechaInicio')?.value, result['fechaFin'], result['numeroDias'],
-       result['valor']);
+      this.reserva = new Reserva(this.actualizaForm.get('id')?.value, result.idCliente, result.nombreCliente,
+       result.tipoVehiculo, this.actualizaForm.get('fechaInicio')?.value, result.fechaFin, result.numeroDias,
+       result.valor);
       this.actualizar();
     },
       error => {
-        window.console.error(error);
-        this.reserva = new Reserva(0, 0, '', 0, this.fecha, this.fecha, 0, 0);
+        this.reserva = new Reserva(0, 0, error, 0, this.fecha, this.fecha, 0, 0);
       });
   }
 
@@ -62,12 +61,12 @@ export class ActualizarReservaComponent implements OnInit {
   }
 
   public calcularFechaPermitida() {
-    let dos = -2;
+    const dos = -2;
     let date = new Date();
     date = this.sumarDias(date, 1);
-    let d = `0${date.getDate()}`.slice(dos);
-    let m = `0${date.getMonth() + 1}`.slice(dos);
-    let y = date.getFullYear();
+    const d = `0${date.getDate()}`.slice(dos);
+    const m = `0${date.getMonth() + 1}`.slice(dos);
+    const y = date.getFullYear();
     this.fecha = `${y}-${m}-${d}`;
   }
 

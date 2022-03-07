@@ -15,7 +15,7 @@ export class ConsultarReservaComponent implements OnInit {
   reserva: Reserva;
   listaReservas: Reserva[] = [];
   tablaVisible = false;
-  mensaje: string;
+  mensajeConsultar: string;
   consultaForm: FormGroup;
 
 
@@ -29,15 +29,15 @@ export class ConsultarReservaComponent implements OnInit {
     this.reservaServices.consultar(this.consultaForm.value).subscribe(result => {
       this.tablaVisible = false;
       this.listaReservas = [];
-      this.reserva = new Reserva(result['id'], result['idCliente'], result['nombreCliente'],
-       result['tipoVehiculo'], result['fechaInicio'], result['fechaFin'], result['numeroDias'],
-        result['valor']);
+      this.reserva = new Reserva(result.id, result.idCliente, result.nombreCliente,
+        result.tipoVehiculo, result.fechaInicio, result.fechaFin, result.numeroDias,
+        result.valor);
       this.listaReservas.push(this.reserva);
       this.tablaVisible = true;
     },
       error => {
-        this.mensaje = error['error']['mensaje'];
-        let element: HTMLElement = document.getElementsByClassName('alerta-consultar')[0] as HTMLElement;
+        this.mensajeConsultar = error.error.mensaje;
+        const element: HTMLElement = document.getElementsByClassName('alerta-consultar')[0] as HTMLElement;
         element.click();
         this.tablaVisible = false;
       });

@@ -8,6 +8,7 @@ import { ReservaService } from '@reserva/shared/service/reserva.service';
 import { CrearReservaComponent } from './crear-reserva.component';
 import { HttpService } from '@core/services/http.service';
 import { of, throwError, } from 'rxjs';
+import { ResponseReserva } from '@reserva/shared/model/response-reserva';
 
 const MENSAJE_RESERVA_CREADA = 'Reserva creada correctamente, Numero de reserva =';
 
@@ -15,6 +16,7 @@ describe('CrearReservaComponent', () => {
   let component: CrearReservaComponent;
   let fixture: ComponentFixture<CrearReservaComponent>;
   let reservaService: ReservaService;
+  const dummyResponseReserva = new ResponseReserva(1);
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -36,7 +38,7 @@ describe('CrearReservaComponent', () => {
     component = fixture.componentInstance;
     reservaService = TestBed.inject(ReservaService);
     spyOn(reservaService, 'guardar').and.returnValue(
-      of(true)
+      of(dummyResponseReserva)
     );
     fixture.detectChanges();
   });
@@ -51,7 +53,7 @@ describe('CrearReservaComponent', () => {
 
   it('Crear fecha permitida', () => {
     component.calcularFechaPermitida();
-    expect(component.fechaPermitida).toBe('2022-03-03');
+    expect(component.fechaPermitida).toBe('2022-03-08');
   });
 
   it('Crear Reserva', () => {
@@ -65,15 +67,12 @@ describe('CrearReservaComponent', () => {
     expect(component.reservaForm.valid).toBeTruthy();
 
     component.crear();
-    expect(component.mensaje).toContain(MENSAJE_RESERVA_CREADA);
+    expect(component.mensajeCrear).toContain(MENSAJE_RESERVA_CREADA);
 
   });
 
   it('Falla Crear Reserva', () => {
-    reservaService.guardar = jasmine.createSpy().and.returnValue(throwError({
-      "nombreExcepcion": "ExcepcionDuplicidad",
-      "mensaje": "El cliente tiene una reserva activa actualmente"
-    }));
+    reservaService.guardar = jasmine.createSpy().and.returnValue(throwError({}));
     component.crear();
     expect(reservaService.guardar).toHaveBeenCalled();
   });

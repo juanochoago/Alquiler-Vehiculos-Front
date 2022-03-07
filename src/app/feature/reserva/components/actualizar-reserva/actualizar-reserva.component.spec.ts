@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-//import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
 import { Reserva } from '@reserva/shared/model/reserva';
@@ -15,7 +14,7 @@ describe('ActualizarReservaComponent', () => {
   let fixture: ComponentFixture<ActualizarReservaComponent>;
   let reservaService: ReservaService;
   const reserva: Reserva = new Reserva(1, 1026295589, 'Juan Angel', 1, '2022-02-28', '2022-03-2', 3, 300000);
-  const MENSAJE_RESERVA_ACTUALIZADA = "Reserva actualizada correctamente, Puede verificarla en el area de consultas";
+  const MENSAJE_RESERVA_ACTUALIZADA = 'Reserva actualizada correctamente, Puede verificarla en el area de consultas';
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ActualizarReservaComponent],
@@ -23,8 +22,6 @@ describe('ActualizarReservaComponent', () => {
         CommonModule,
         HttpClientModule,
         RouterTestingModule,
-        //  ReactiveFormsModule,
-        //FormsModule
       ],
       providers: [ReservaService, HttpService],
     })
@@ -51,7 +48,7 @@ describe('ActualizarReservaComponent', () => {
 
   it('Crear fecha permitida', () => {
     component.calcularFechaPermitida();
-    expect(component.fecha).toBe('2022-03-03');
+    expect(component.fecha).toBe('2022-03-08');
   });
 
   it('Actualizando reserva', () => {
@@ -60,7 +57,7 @@ describe('ActualizarReservaComponent', () => {
     component.actualizaForm.controls.fechaInicio.setValue('25-03-2022');
     expect(component.actualizaForm.valid).toBeTruthy();
     spyOn(reservaService, 'consultar').and.callFake(() => {
-      return of(reserva)
+      return of(reserva);
     });
     component.consultar();
     expect(reservaService.consultar).toHaveBeenCalled();
@@ -69,17 +66,10 @@ describe('ActualizarReservaComponent', () => {
   });
 
   it('Falla Actualizar Reserva', () => {
-    reservaService.consultar = jasmine.createSpy().and.returnValue(throwError({
-      "nombreExcepcion": "EmptyResultDataAccessException",
-      "mensaje": "Ocurrio un error favor contactar al administrador."
-    }));
+    reservaService.consultar = jasmine.createSpy().and.returnValue(throwError({}));
     component.consultar();
-    reservaService.actualizar = jasmine.createSpy().and.returnValue(throwError({
-      "nombreExcepcion": "ExcepcionDuplicidad",
-      "mensaje": "La reserva no existe en el sistema"
-    }));
+    reservaService.actualizar = jasmine.createSpy().and.returnValue(throwError({}));
     component.actualizar();
     expect(reservaService.actualizar).toHaveBeenCalled();
   });
-
 });

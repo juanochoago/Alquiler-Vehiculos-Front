@@ -19,7 +19,7 @@ export class CrearReservaComponent implements OnInit {
 
   reservaForm: FormGroup;
   fechaPermitida: string;
-  mensaje: string;
+  mensajeCrear: string;
 
   constructor(protected reservaService: ReservaService) { }
 
@@ -30,14 +30,14 @@ export class CrearReservaComponent implements OnInit {
 
   crear() {
     this.reservaService.guardar(this.reservaForm.value).subscribe((result) => {
-      this.mensaje = MENSAJE_RESERVA_CREADA + result['valor'];
-      let element: HTMLElement = document.getElementsByClassName('alerta-crear')[0] as HTMLElement;
+      this.mensajeCrear = MENSAJE_RESERVA_CREADA + result.valor;
+      const element: HTMLElement = document.getElementsByClassName('alerta-crear')[0] as HTMLElement;
       element.click();
       this.reservaForm.reset();
     },
       error => {
-        this.mensaje = error['error']['mensaje'];
-        let element: HTMLElement = document.getElementsByClassName('alerta-crear')[0] as HTMLElement;
+        this.mensajeCrear = error.error.mensaje;
+        const element: HTMLElement = document.getElementsByClassName('alerta-crear')[0] as HTMLElement;
         element.click();
       });
   }
@@ -56,12 +56,12 @@ export class CrearReservaComponent implements OnInit {
   }
 
   public calcularFechaPermitida() {
-    let menosDos = -2;
+    const menosDos = -2;
     let date = new Date();
     date = this.sumarDias(date, 1);
-    let day = `0${date.getDate()}`.slice(menosDos);
-    let month = `0${date.getMonth() + 1}`.slice(menosDos);
-    let year = date.getFullYear();
+    const day = `0${date.getDate()}`.slice(menosDos);
+    const month = `0${date.getMonth() + 1}`.slice(menosDos);
+    const year = date.getFullYear();
     this.fechaPermitida = `${year}-${month}-${day}`;
   }
 

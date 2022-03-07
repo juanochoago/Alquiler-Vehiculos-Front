@@ -32,7 +32,7 @@ describe('workspace-project Producto', () => {
         reserva.ingresarFechaInicio(FECHA_INICIO);
         reserva.ingresarNumeroDias(NUMERO_DIAS);
         reserva.clickBotonCrearLaReserva();
-        expect(reserva.obtenerMensajeCrearReserva()).toContain(MENSAJE_RESERVA_CREADA);
+        expect(reserva.obtenerMensajeModal()).toContain(MENSAJE_RESERVA_CREADA);
     });
 
     it('Deberia consultar reserva', () => {
@@ -52,8 +52,8 @@ describe('workspace-project Producto', () => {
         navBar.clickBotonReservas();
         reserva.clickBotonActualizarReserva();
         reserva.ingresarIdReserva(ID_RESERVA);
-        reserva.ingresarFechaInicio(FECHA_INICIO)
+        reserva.ingresarFechaInicio(FECHA_INICIO);
         reserva.clickBotonActualizarLaReserva();
-        expect(reserva.obtenerMensajeActualizarReserva()).toContain(MENSAJE_RESERVA_ACTUALIZADA);
+        expect(reserva.obtenerMensajeModal()).toContain(MENSAJE_RESERVA_ACTUALIZADA);
     });
 });

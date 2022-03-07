@@ -10,12 +10,11 @@ export class ReservaPage {
     private inputFechaInicio = element(by.id('fechaInicio'));
     private inputNumeroDias = element(by.id('numeroDias'));
     private botonCrearReserva = element(by.id('botonCrear'));
-    private mensajeCrear = element(by.css('#alertaCrearModal div.modal-body h6'));
-    private inputIdReserva = element(by.id('id'))
+    private mensajeModal = element(by.css('#alertaModal div.modal-body h6'));
+    private inputIdReserva = element(by.id('id'));
     private botonConsultarReserva = element(by.id('botonConsultar'));
     private listaReservas = element.all(by.css('tbody tr'));
     private botonActualizarReserva = element(by.id('botonActualizar'));
-    private mensajeActualizar = element(by.css('#alertaActualizarModal div.modal-body h6'));
 
     async clickBotonCrearReserva() {
         await this.linkCrearReserva.click();
@@ -65,12 +64,8 @@ export class ReservaPage {
         await this.botonActualizarReserva.submit();
     }
 
-    async obtenerMensajeCrearReserva() {
-        return this.mensajeCrear.getText() as Promise<string>;
-    }
-
-    async obtenerMensajeActualizarReserva() {
-        return this.mensajeActualizar.getText() as Promise<string>;
+    async obtenerMensajeModal() {
+        return this.mensajeModal.getText() as Promise<string>;
     }
 
     async contarReservas() {

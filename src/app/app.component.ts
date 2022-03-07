@@ -7,13 +7,11 @@ import { MenuItem } from '@core/modelo/menu-item';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'app-base';
   public companies: MenuItem[] = [
     { url: '/home', nombre: 'home' },
     { url: '/reserva', nombre: 'reserva' }
-    
   ];
-
-  
 }

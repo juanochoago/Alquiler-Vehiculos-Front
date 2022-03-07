@@ -44,19 +44,7 @@
     </div>
 </form>
 <!-- Button trigger modal -->
-<button type="button" class="alerta-crear btn btn-primary" data-bs-toggle="modal" data-bs-target="#alertaCrearModal" hidden>
+<button type="button" class="alerta-crear btn btn-primary" data-bs-toggle="modal" data-bs-target="#alertaModal" hidden>
     Alert Modal
-  </button>
-<!-- Modal -->
-<div class="modal" id="alertaCrearModal" tabindex="-1" aria-labelledby="alertaCrearModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h6>{{mensaje}}</h6>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
+</button>
+<app-modal [mensaje]='mensajeCrear'></app-modal>
